@@ -16,6 +16,9 @@ class TeamSharpList extends SharpEntityList
             EntityListDataContainer::make("name")
                 ->setLabel("Name")
         )->addDataContainer(
+            EntityListDataContainer::make("country")
+                ->setLabel("Country")
+        )->addDataContainer(
             EntityListDataContainer::make("players")
                 ->setLabel("Players")
         );
@@ -28,7 +31,8 @@ class TeamSharpList extends SharpEntityList
 
     function buildListLayout()
     {
-        $this->addColumn("name", 8)
+        $this->addColumn("name", 4)
+            ->addColumn("country", 4)
             ->addColumn("players", 4);
     }
 

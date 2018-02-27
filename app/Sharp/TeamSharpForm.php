@@ -17,13 +17,17 @@ class TeamSharpForm extends SharpForm
         $this->addField(
             SharpFormTextField::make("name")
                 ->setLabel("Name")
+        )->addField(
+            SharpFormTextField::make("country")
+                ->setLabel("Country")
         );
     }
 
     function buildFormLayout()
     {
         $this->addColumn(6, function(FormLayoutColumn $column) {
-            $column->withSingleField("name");
+            $column->withSingleField("name")
+                ->withSingleField("country");
         });
     }
 
