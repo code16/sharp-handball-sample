@@ -8,6 +8,7 @@ return [
         "players" => [
             "list" => \App\Sharp\PlayerSharpList::class,
             "form" => \App\Sharp\PlayerSharpForm::class,
+            "validator" => \App\Sharp\PlayerSharpValidator::class,
         ],
         "teams" => [
             "list" => \App\Sharp\TeamSharpList::class,
