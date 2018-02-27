@@ -26,7 +26,8 @@ class TeamSharpList extends SharpEntityList
 
     function buildListConfig()
     {
-        $this->setPaginated();
+        $this->setPaginated()
+            ->addFilter("country", CountryFilter::class);
     }
 
     function buildListLayout()
@@ -38,12 +39,18 @@ class TeamSharpList extends SharpEntityList
 
     function getListData(EntityListQueryParams $params)
     {
+        $teams = Team::orderBy("name", "asc");
+
+        if($country = $params->filterFor("country")) {
+            $teams->where("country", $country);
+        }
+
         return $this
             ->setCustomTransformer("players", function($players, $team) {
                 return $team->players()->count();
             })
             ->transform(
-                Team::orderBy("name", "asc")->paginate(30)
+                $teams->paginate(30)
             );
     }
 }
