@@ -30,7 +30,8 @@ class PlayerSharpList extends SharpEntityList
     function buildListConfig()
     {
         $this->setPaginated()
-            ->setSearchable();
+            ->setSearchable()
+            ->addFilter("team", TeamFilter::class);
     }
 
     function buildListLayout()
@@ -44,7 +45,7 @@ class PlayerSharpList extends SharpEntityList
     {
         $players = Player::orderBy(
             $params->sortedBy(), $params->sortedDir()
-        );
+        )->where("team_id", $params->filterFor("team"));
 
         collect($params->searchWords())
             ->each(function($word) use($players) {
