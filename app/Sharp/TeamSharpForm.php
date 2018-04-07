@@ -25,6 +25,7 @@ class TeamSharpForm extends SharpForm
             SharpFormListField::make("titles")
                 ->setLabel("Titles")
                 ->setAddable()->setAddText("Add a title")
+                ->setSortable()->setOrderAttribute("order")
                 ->setRemovable()
                 ->addItemField(
                     SharpFormTextField::make("competition")

@@ -15,6 +15,7 @@ class Team extends Model
 
     public function titles()
     {
-        return $this->hasMany(Title::class);
+        return $this->hasMany(Title::class)
+            ->orderBy("order");
     }
 }
