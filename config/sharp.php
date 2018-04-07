@@ -13,6 +13,7 @@ return [
         "teams" => [
             "list" => \App\Sharp\TeamSharpList::class,
             "form" => \App\Sharp\TeamSharpForm::class,
+            "validator" => \App\Sharp\TeamSharpValidator::class,
         ],
     ],
 
