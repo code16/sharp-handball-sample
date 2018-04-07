@@ -12,4 +12,9 @@ class Team extends Model
     {
         return $this->hasMany(Player::class);
     }
+
+    public function titles()
+    {
+        return $this->hasMany(Title::class);
+    }
 }
