@@ -5,7 +5,7 @@ namespace App\Sharp;
 use App\Player;
 use Code16\Sharp\EntityList\Commands\InstanceCommand;
 
-class SetPlayerInjuredCommand extends InstanceCommand
+class SetPlayerRecoveredCommand extends InstanceCommand
 {
 
     /**
@@ -13,7 +13,7 @@ class SetPlayerInjuredCommand extends InstanceCommand
      */
     public function label(): string
     {
-        return "Declare injured";
+        return "Declare recovered";
     }
 
     /**
@@ -23,7 +23,7 @@ class SetPlayerInjuredCommand extends InstanceCommand
      */
     public function execute($instanceId, array $data = []): array
     {
-        Player::findOrFail($instanceId)->setInjured(true);
+        Player::findOrFail($instanceId)->setInjured(false);
 
         return $this->reload();
     }
@@ -34,6 +34,6 @@ class SetPlayerInjuredCommand extends InstanceCommand
      */
     public function authorizeFor($instanceId): bool
     {
-        return !Player::findOrFail($instanceId)->injured;
+        return Player::findOrFail($instanceId)->injured;
     }
 }
