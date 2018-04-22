@@ -12,4 +12,11 @@ class Player extends Model
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function setInjured(bool $injured)
+    {
+        $this->update([
+            "injured" => $injured
+        ]);
+    }
 }

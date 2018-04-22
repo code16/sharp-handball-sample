@@ -31,7 +31,8 @@ class PlayerSharpList extends SharpEntityList
     {
         $this->setPaginated()
             ->setSearchable()
-            ->addFilter("team", TeamFilter::class);
+            ->addFilter("team", TeamFilter::class)
+            ->addEntityCommand("set_injured", SetPlayerInjuredCommand::class);
     }
 
     function buildListLayout()
@@ -56,6 +57,10 @@ class PlayerSharpList extends SharpEntityList
             });
 
         return $this
+            ->setCustomTransformer("name", function($name, $player) {
+                return $player->name .
+                    ($player->injured ? " (<em>injured</em>)" : "");
+            })
             ->setCustomTransformer("ratings", function($rating) {
                 return collect(array_fill(0, $rating, ""))
                     ->map(function() {
