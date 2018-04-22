@@ -32,8 +32,9 @@ class PlayerSharpList extends SharpEntityList
         $this->setPaginated()
             ->setSearchable()
             ->addFilter("team", TeamFilter::class)
-            ->addEntityCommand("set_injured", SetPlayerInjuredCommand::class)
-            ->addEntityCommand("set_recovered", SetPlayerRecoveredCommand::class);
+            ->addInstanceCommand("set_injured", SetPlayerInjuredCommand::class)
+            ->addInstanceCommand("set_recovered", SetPlayerRecoveredCommand::class)
+            ->addEntityCommand("set_team_injured", SetAllTeamInjuredCommand::class);
     }
 
     function buildListLayout()
