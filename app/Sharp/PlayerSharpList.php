@@ -4,6 +4,7 @@ namespace App\Sharp;
 
 use App\Player;
 use Code16\Sharp\EntityList\Containers\EntityListDataContainer;
+use Code16\Sharp\EntityList\Eloquent\Transformers\SharpUploadModelAttributeTransformer;
 use Code16\Sharp\EntityList\EntityListQueryParams;
 use Code16\Sharp\EntityList\SharpEntityList;
 
@@ -13,6 +14,9 @@ class PlayerSharpList extends SharpEntityList
     function buildListDataContainers()
     {
         $this->addDataContainer(
+            EntityListDataContainer::make("picture")
+                ->setLabel("")
+        )->addDataContainer(
             EntityListDataContainer::make("name")
                 ->setLabel("Name")
                 ->setSortable()
@@ -39,9 +43,10 @@ class PlayerSharpList extends SharpEntityList
 
     function buildListLayout()
     {
-        $this->addColumn("name", 4)
+        $this->addColumn("picture", 1)
+            ->addColumn("name", 4)
             ->addColumn("team:name", 4)
-            ->addColumn("ratings", 4);
+            ->addColumn("ratings", 3);
     }
 
     function getListData(EntityListQueryParams $params)
@@ -70,8 +75,9 @@ class PlayerSharpList extends SharpEntityList
                     })
                     ->implode('');
             })
+            ->setCustomTransformer("picture", new SharpUploadModelAttributeTransformer(100))
             ->transform(
-                $players->with("team")->paginate(30)
+                $players->with("team", "picture")->paginate(30)
             );
     }
 }
